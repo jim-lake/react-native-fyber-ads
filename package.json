@@ -1,0 +1,24 @@
+
+{
+  "name": "react-native-fyber-ads",
+  "version": "1.0.0",
+  "description": "React Native bindings for Fyber FairBid SDK",
+  "main": "src/fyber_ads.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "fyber"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": "^0.61",
+  },
+  "files": [
+    "src/*",
+    "ios/**/*",
+    "android/**/*"
+  ]
+}
