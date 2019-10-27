@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.61",
+    "react-native": "^0.61"
   },
   "files": [
     "src/*",
