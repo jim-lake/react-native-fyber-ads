@@ -1,4 +1,3 @@
-'use strict';
 
 import {
   Platform,
@@ -33,57 +32,84 @@ function removeListener(event,callback) {
   g_eventEmitter.removeListener(event,callback);
 }
 
-function init(publisherId,done) {
+function init(appId,done) {
   if (!done) {
     done = function() {};
   }
-  RNFyberAds.initWithPublisherID(publisherId,done);
+  RNFyberAds.initWithAppId(appId,done);
+}
+function setUserId(userId) {
+  RNFyberAds.setUserId(setUserId);
 }
 
-const getStatus = RNFyberAds.getStatus;
-const showDebugPanel = RNFyberAds.showDebugPanel;
-
-const isInterstitialAvailable = RNFyberAds.isInterstitialAvailable;
-const isVideoAvailable = RNFyberAds.isVideoAvailable;
-const isIncentivizedAdAvailable = RNFyberAds.isIncentivizedAdAvailable;
-
-function wrapMethod(method) {
-  return (done) => {
-    if (!done) {
-      done = function() {};
-    }
-    method(done);
-  }
+function getStatus(done) {
+  RNFyberAds.isStarted((err,is_started) => {
+    done(null,{ isFyberFairBidInitialized: is_started });
+  });
 }
 
-const fetchInterstitial = wrapMethod(RNFyberAds.fetchInterstitial);
-const showInterstitial = wrapMethod(RNFyberAds.showInterstitial);
+const showDebugPanel = RNFyberAds.presentTestSuite;
+const presentTestSuite = RNFyberAds.presentTestSuite;
 
-const fetchVideo = wrapMethod(RNFyberAds.fetchVideo);
-const showVideo = wrapMethod(RNFyberAds.showVideo);
+function isVideoAvailable() {
+  throw new Error("Use Interstitial");
+}
+function fetchVideo() {
+  throw new Error("Use Interstitial");
+}
+function showVideo() {
+  throw new Error("Use Interstitial");
+}
 
-const fetchIncentivizedAd = wrapMethod(RNFyberAds.fetchIncentivizedAd);
-const showIncentivizedAd = wrapMethod(RNFyberAds.showIncentivizedAd);
+function isInterstitialAvailable(placementId,done) {
+  RNFyberAds.isInterstitialAvailable(placementId,done);
+}
+function fetchInterstitial(placementId) {
+  RNFyberAds.fetchInterstitial(placementId);
+}
+function showInterstitial(opts,done) {
+  const { placementId, customParameters } = opts;
+  RNFyberAds.showInterstitial(placementId,customParameters || {},err => {
+    done && done(err);
+  });
+}
+
+function isRewardedAvailable(placementId,done) {
+  RNFyberAds.isRewardedAvailable(placementId,done);
+}
+function fetchRewardedAd(placementId) {
+  RNFyberAds.fetchRewardedAd(placementId);
+}
+function showRewardedAd(opts,done) {
+  const { placementId, customParameters } = opts;
+  RNFyberAds.showRewardedAd(placementId,customParameters || {},err => {
+    done && done(err);
+  });
+}
 
 export default {
   once,
   on,
   removeListener,
-  init,
 
+  init,
+  setUserId,
   getStatus,
   showDebugPanel,
+  presentTestSuite,
 
-  isInterstitialAvailable,
   isVideoAvailable,
-  isIncentivizedAdAvailable,
-
-  fetchInterstitial,
-  showInterstitial,
-
   fetchVideo,
   showVideo,
 
-  fetchIncentivizedAd,
-  showIncentivizedAd,
+  isInterstitialAvailable,
+  fetchInterstitial,
+  showInterstitial,
+
+  isRewardedAvailable,
+  fetchRewardedAd,
+  showRewardedAd,
+  isIncentivizedAdAvailable: isRewardedAvailable,
+  fetchIncentivizedAd: fetchRewardedAd,
+  showIncentivizedAd: showRewardedAd,
 };

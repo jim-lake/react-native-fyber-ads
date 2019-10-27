@@ -11,6 +11,7 @@
 {
   bool _hasListeners;
 }
+
 RCT_EXPORT_MODULE();
 
 + (BOOL)requiresMainQueueSetup {
@@ -83,7 +84,7 @@ RCT_EXPORT_METHOD(showInterstitial:(NSString *)placementId
 }
 
 RCT_EXPORT_METHOD(fetchRewardedAd:(NSString *)placementId) {
-  [FYBRewarded request:placementId]
+  [FYBRewarded request:placementId];
 }
 RCT_EXPORT_METHOD(isRewardedAdAvailable:(NSString *)placementId
                                     callback:(RCTResponseSenderBlock)callback) {
@@ -101,7 +102,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
   }
 }
 
-- (NSDictionary *)_impressionDataToDict:(FYBImpressionData)data {
+- (NSDictionary *)_impressionDataToDict:(FYBImpressionData *)data {
   NSString *priceAccuracy = nil;
   NSString *placementType = nil;
 
@@ -160,7 +161,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
   [self sendEvent:@"interstitialDidShow"
     body:@{
       @"placementId": placementId,
-      @"impressionData": _impressionDataToDict(impressionData),
+      @"impressionData": [self _impressionDataToDict:impressionData],
     }];
 }
 
@@ -171,7 +172,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
     body:@{
       @"placementId": placementId,
       @"error": error,
-      @"impressionData": _impressionDataToDict(impressionData),
+      @"impressionData": [self _impressionDataToDict:impressionData],
   }];
 }
 
@@ -202,7 +203,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
   [self sendEvent:@"rewardedDidShow"
     body:@{
       @"placementId": placementId,
-      @"impressionData": _impressionDataToDict(impressionData),
+      @"impressionData": [self _impressionDataToDict:impressionData],
   }];
 }
 
@@ -213,7 +214,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
     body:@{
       @"placementId": placementId,
       @"error": error,
-      @"impressionData": _impressionDataToDict(impressionData),
+      @"impressionData": [self _impressionDataToDict:impressionData],
   }];
 }
 
