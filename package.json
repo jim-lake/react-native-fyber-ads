@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-fyber-ads",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React Native bindings for Fyber FairBid SDK",
   "main": "src/fyber_ads.js",
   "scripts": {
