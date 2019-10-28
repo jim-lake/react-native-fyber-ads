@@ -74,8 +74,8 @@ function showInterstitial(opts,done) {
   });
 }
 
-function isRewardedAvailable(placementId,done) {
-  RNFyberAds.isRewardedAvailable(placementId,done);
+function isRewardedAdAvailable(placementId,done) {
+  RNFyberAds.isRewardedAdAvailable(placementId,done);
 }
 function fetchRewardedAd(placementId) {
   RNFyberAds.fetchRewardedAd(placementId);
@@ -106,10 +106,10 @@ export default {
   fetchInterstitial,
   showInterstitial,
 
-  isRewardedAvailable,
+  isRewardedAdAvailable,
   fetchRewardedAd,
   showRewardedAd,
-  isIncentivizedAdAvailable: isRewardedAvailable,
+  isIncentivizedAdAvailable: isRewardedAdAvailable,
   fetchIncentivizedAd: fetchRewardedAd,
   showIncentivizedAd: showRewardedAd,
 };
