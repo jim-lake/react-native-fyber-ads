@@ -198,9 +198,8 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void fetchInterstitial(final String placementId,final Callback callback) {
+  public void fetchInterstitial(final String placementId) {
     Interstitial.request(placementId);
-    callback.invoke((Object)null);
   }
 
   @ReactMethod
@@ -219,9 +218,8 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void fetchRewarded(final String placementId,final Callback callback) {
+  public void fetchRewardedAd(final String placementId) {
     Rewarded.request(placementId);
-    callback.invoke((Object)null);
   }
 
   @ReactMethod
