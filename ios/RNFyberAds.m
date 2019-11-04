@@ -72,15 +72,10 @@ RCT_EXPORT_METHOD(fetchInterstitial:(NSString *)placementId) {
   [FYBInterstitial request:placementId];
 }
 RCT_EXPORT_METHOD(showInterstitial:(NSString *)placementId
-                  customParameters:(NSDictionary *)customParameters
-                          callback:(RCTResponseSenderBlock)callback) {
-  if ([FYBInterstitial isAvailable:placementId]) {
-    FYBShowOptions *options = [FYBShowOptions new];
-    options.customParameters = customParameters;
-    [FYBInterstitial show:placementId options:options];
-  } else {
-    callback(@[@"no_interstitial_available"]);
-  }
+                  customParameters:(NSDictionary *)customParameters) {
+  FYBShowOptions *options = [FYBShowOptions new];
+  options.customParameters = customParameters;
+  [FYBInterstitial show:placementId options:options];
 }
 
 RCT_EXPORT_METHOD(fetchRewardedAd:(NSString *)placementId) {
@@ -91,15 +86,10 @@ RCT_EXPORT_METHOD(isRewardedAdAvailable:(NSString *)placementId
   callback(@[[NSNull null],@([FYBRewarded isAvailable:placementId])]);
 }
 RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
-                      customParameters:(NSDictionary *)customParameters
-                              callback:(RCTResponseSenderBlock)callback) {
-  if ([FYBRewarded isAvailable:placementId]) {
-    FYBShowOptions *options = [FYBShowOptions new];
-    options.customParameters = customParameters;
-    [FYBRewarded show:placementId options:options];
-  } else {
-    callback(@[@"no_incentivized_ad_available"]);
-  }
+                      customParameters:(NSDictionary *)customParameters) {
+  FYBShowOptions *options = [FYBShowOptions new];
+  options.customParameters = customParameters;
+  [FYBRewarded show:placementId options:options];
 }
 
 - (NSDictionary *)_impressionDataToDict:(FYBImpressionData *)data {

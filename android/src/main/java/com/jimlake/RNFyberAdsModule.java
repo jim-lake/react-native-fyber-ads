@@ -208,13 +208,8 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void showInterstitial(final String placementId,final Callback callback) {
-    if (Interstitial.isAvailable(placementId)) {
-      Interstitial.show(placementId,getCurrentActivity());
-      callback.invoke((Object)null);
-    } else {
-      callback.invoke("no_interstitial_ad_available");
-    }
+  public void showInterstitial(final String placementId,final ReadableMap ignore) {
+    Interstitial.show(placementId,getCurrentActivity());
   }
 
   @ReactMethod
@@ -228,13 +223,8 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void showRewardedAd(final String placementId,final Callback callback) {
-    if (Rewarded.isAvailable(placementId)) {
-      Rewarded.show(placementId,getCurrentActivity());
-      callback.invoke((Object)null);
-    } else {
-      callback.invoke("no_rewarded_ad_available");
-    }
+  public void showRewardedAd(final String placementId,final ReadableMap ignore) {
+    Rewarded.show(placementId,getCurrentActivity());
   }
 
 }

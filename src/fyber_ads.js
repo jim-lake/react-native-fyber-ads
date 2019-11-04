@@ -48,8 +48,9 @@ function getStatus(done) {
   });
 }
 
-const showDebugPanel = RNFyberAds.presentTestSuite;
-const presentTestSuite = RNFyberAds.presentTestSuite;
+function presentTestSuite() {
+  RNFyberAds.presentTestSuite();
+}
 
 function isVideoAvailable() {
   throw new Error("Use Interstitial");
@@ -67,11 +68,12 @@ function isInterstitialAvailable(placementId,done) {
 function fetchInterstitial(placementId) {
   RNFyberAds.fetchInterstitial(placementId);
 }
-function showInterstitial(opts,done) {
+function showInterstitial(opts) {
   const { placementId, customParameters } = opts;
-  RNFyberAds.showInterstitial(placementId,customParameters || {},err => {
-    done && done(err);
-  });
+  if (!placementId) {
+    throw new Error("placementId is required");
+  }
+  RNFyberAds.showInterstitial(placementId,customParameters || {});
 }
 
 function isRewardedAdAvailable(placementId,done) {
@@ -80,11 +82,12 @@ function isRewardedAdAvailable(placementId,done) {
 function fetchRewardedAd(placementId) {
   RNFyberAds.fetchRewardedAd(placementId);
 }
-function showRewardedAd(opts,done) {
+function showRewardedAd(opts) {
   const { placementId, customParameters } = opts;
-  RNFyberAds.showRewardedAd(placementId,customParameters || {},err => {
-    done && done(err);
-  });
+  if (!placementId) {
+    throw new Error("placementId is required");
+  }
+  RNFyberAds.showRewardedAd(placementId,customParameters || {});
 }
 
 export default {
@@ -95,8 +98,8 @@ export default {
   init,
   setUserId,
   getStatus,
-  showDebugPanel,
   presentTestSuite,
+  showDebugPanel: presentTestSuite,
 
   isVideoAvailable,
   fetchVideo,
