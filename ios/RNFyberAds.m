@@ -147,18 +147,18 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
 //**************** INSTERSTITIAL ****************
 
 - (void)interstitialIsAvailable:(NSString *)placementId {
-  [self sendEvent:@"interstitialIsAvailable"
+  [self sendEvent:@"onAvailable"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)interstitialIsUnavailable:(NSString *)placementId {
-  [self sendEvent:@"interstitialIsUnavailable"
+  [self sendEvent:@"onUnavailable"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)interstitialDidShow:(NSString *)placementId
              impressionData:(FYBImpressionData *)impressionData {
-  [self sendEvent:@"interstitialDidShow"
+  [self sendEvent:@"onShow"
     body:@{
       @"placementId": placementId,
       @"impressionData": [self _impressionDataToDict:impressionData],
@@ -168,7 +168,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
 - (void)interstitialDidFailToShow:(NSString *)placementId
                         withError:(NSError *)error
                    impressionData:(FYBImpressionData *)impressionData {
-  [self sendEvent:@"interstitialDidFailToShow"
+  [self sendEvent:@"onShowFailure"
     body:@{
       @"placementId": placementId,
       @"error": error,
@@ -177,30 +177,30 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
 }
 
 - (void)interstitialDidClick:(NSString *)placementId {
-  [self sendEvent:@"interstitialDidClick"
+  [self sendEvent:@"onClick"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)interstitialDidDismiss:(NSString *)placementId {
-  [self sendEvent:@"interstitialDidDismiss"
+  [self sendEvent:@"onHide"
     body:@{ @"placementId": placementId, }];
 }
 
 //**************** REWARDED ****************
 
 - (void)rewardedIsAvailable:(NSString *)placementId {
-  [self sendEvent:@"rewardedIsAvailable"
+  [self sendEvent:@"onAvailable"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)rewardedIsUnavailable:(NSString *)placementId {
-  [self sendEvent:@"rewardedIsUnavailable"
+  [self sendEvent:@"onUnavailable"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)rewardedDidShow:(NSString *)placementId
          impressionData:(FYBImpressionData *)impressionData {
-  [self sendEvent:@"rewardedDidShow"
+  [self sendEvent:@"onShow"
     body:@{
       @"placementId": placementId,
       @"impressionData": [self _impressionDataToDict:impressionData],
@@ -210,7 +210,7 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
 - (void)rewardedDidFailToShow:(NSString *)placementId
                     withError:(NSError *)error
                impressionData:(FYBImpressionData *)impressionData {
-  [self sendEvent:@"rewardedDidFailToShow"
+  [self sendEvent:@"onShowFailure"
     body:@{
       @"placementId": placementId,
       @"error": error,
@@ -219,18 +219,18 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
 }
 
 - (void)rewardedDidClick:(NSString *)placementId {
-  [self sendEvent:@"rewardedDidClick"
+  [self sendEvent:@"onClick"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)rewardedDidDismiss:(NSString *)placementId {
-  [self sendEvent:@"rewardedDidDismiss"
+  [self sendEvent:@"onHide"
     body:@{ @"placementId": placementId, }];
 }
 
 - (void)rewardedDidComplete:(NSString *)placementId
                userRewarded:(BOOL)userRewarded {
-  [self sendEvent:@"rewardedDidComplete"
+  [self sendEvent:@"onCompletion"
     body:@{
       @"placementId": placementId,
       @"userRewarded": @(userRewarded),
