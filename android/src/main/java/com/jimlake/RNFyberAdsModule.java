@@ -40,57 +40,57 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   private final InterstitialListener interstitialListener = new InterstitialListener() {
     @Override
     public void onShow(String placementId, ImpressionData impressionData) {
-      sendReactEvent("onShow",placementId,impressionData);
+      sendReactEvent("show",placementId,impressionData);
     }
     @Override
     public void onClick(String placementId) {
-      sendReactEvent("onClick",placementId);
+      sendReactEvent("click",placementId);
     }
     @Override
     public void onHide(String placementId) {
-      sendReactEvent("onHide",placementId);
+      sendReactEvent("hide",placementId);
     }
     @Override
     public void onShowFailure(String placementId, ImpressionData impressionData) {
-      sendReactEvent("onShowFailure",placementId,impressionData);
+      sendReactEvent("showFailure",placementId,impressionData);
     }
     @Override
     public void onAvailable(String placementId) {
-      sendReactEvent("onAvailable",placementId);
+      sendReactEvent("available",placementId);
     }
     @Override
     public void onUnavailable(String placementId) {
-      sendReactEvent("onUnavailable",placementId);
+      sendReactEvent("unavailable",placementId);
     }
   };
   private final RewardedListener rewardedListener = new RewardedListener() {
     @Override
     public void onShow(String placementId, ImpressionData impressionData) {
-      sendReactEvent("onShow",placementId,impressionData);
+      sendReactEvent("show",placementId,impressionData);
     }
     @Override
     public void onClick(String placementId) {
-      sendReactEvent("onClick",placementId);
+      sendReactEvent("click",placementId);
     }
     @Override
     public void onHide(String placementId) {
-      sendReactEvent("onHide",placementId);
+      sendReactEvent("hide",placementId);
     }
     @Override
     public void onShowFailure(String placementId, ImpressionData impressionData) {
-      sendReactEvent("onShowFailure",placementId,impressionData);
+      sendReactEvent("showFailure",placementId,impressionData);
     }
     @Override
     public void onAvailable(String placementId) {
-      sendReactEvent("onAvailable",placementId);
+      sendReactEvent("available",placementId);
     }
     @Override
     public void onUnavailable(String placementId) {
-      sendReactEvent("onUnavailable",placementId);
+      sendReactEvent("unavailable",placementId);
     }
     @Override
     public void onCompletion(@NonNull String placementId, boolean userRewarded) {
-      sendReactEvent("onCompletion",placementId);
+      sendReactEvent("completion",placementId);
     }
   };
 
