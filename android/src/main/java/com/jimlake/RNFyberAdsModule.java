@@ -2,6 +2,9 @@ package com.jimlake.fyberads;
 
 import javax.annotation.Nullable;
 import androidx.annotation.NonNull;
+import java.util.Map;
+import java.util.Iterator;
+import java.util.HashMap;
 
 import android.app.Activity;
 
@@ -9,6 +12,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
@@ -22,6 +27,7 @@ import com.fyber.fairbid.ads.interstitial.InterstitialListener;
 import com.fyber.fairbid.ads.Rewarded;
 import com.fyber.fairbid.ads.rewarded.RewardedListener;
 import com.fyber.fairbid.ads.PlacementType;
+import com.fyber.fairbid.ads.rewarded.RewardedOptions;
 
 public class RNFyberAdsModule extends ReactContextBaseJavaModule {
 
@@ -223,8 +229,21 @@ public class RNFyberAdsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void showRewardedAd(final String placementId,final ReadableMap ignore) {
-    Rewarded.show(placementId,getCurrentActivity());
+  public void showRewardedAd(final String placementId,final ReadableMap customParameters) {
+    final RewardedOptions options = new RewardedOptions();
+    if (customParameters != null) {
+      final Map<String,String> paramMap = new HashMap<String,String>();
+      final Iterator<Map.Entry<String, Object>> i = customParameters.getEntryIterator();
+      while (i.hasNext()) {
+        Map.Entry<String, Object> entry = i.next();
+        String key = entry.getKey();
+        Object val = entry.getValue();
+        if (val != null) {
+          paramMap.put(key,val.toString());
+        }
+      }
+      options.setCustomParameters(paramMap);
+    }
+    Rewarded.show(placementId,options,getCurrentActivity());
   }
-
 }
