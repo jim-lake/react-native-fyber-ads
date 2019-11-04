@@ -92,9 +92,11 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
   [FYBRewarded show:placementId options:options];
 }
 
+#define DICT_DEFAULT(val,def) val != nil ? val : def
+
 - (NSDictionary *)_impressionDataToDict:(FYBImpressionData *)data {
-  NSString *priceAccuracy = nil;
-  NSString *placementType = nil;
+  NSString *priceAccuracy = @"";
+  NSString *placementType = @"";
 
   switch (data.priceAccuracy) {
     case FYBImpressionDataPriceAccuracyUndisclosed:
@@ -120,16 +122,16 @@ RCT_EXPORT_METHOD(showRewardedAd:(NSString *)placementId
   }
 
   return @{
-    @"advertiserDomain": data.advertiserDomain,
-    @"campaignId": data.campaignId,
-    @"countryCode": data.countryCode,
-    @"creativeId": data.creativeId,
-    @"currency": data.currency,
-    @"demandSource": data.demandSource,
-    @"netPayout": data.netPayout,
-    @"networkInstanceId": data.networkInstanceId,
-    @"renderingSDK": data.renderingSDK,
-    @"renderingSDKVersion": data.renderingSDKVersion,
+    @"advertiserDomain": DICT_DEFAULT(data.advertiserDomain,[NSNull null]),
+    @"campaignId": DICT_DEFAULT(data.campaignId,[NSNull null]),
+    @"countryCode": DICT_DEFAULT(data.countryCode,[NSNull null]),
+    @"creativeId": DICT_DEFAULT(data.creativeId,[NSNull null]),
+    @"currency": DICT_DEFAULT(data.currency,[NSNull null]),
+    @"demandSource": DICT_DEFAULT(data.demandSource,[NSNull null]),
+    @"netPayout": DICT_DEFAULT(data.netPayout,[NSNull null]),
+    @"networkInstanceId": DICT_DEFAULT(data.networkInstanceId,[NSNull null]),
+    @"renderingSDK": DICT_DEFAULT(data.renderingSDK,[NSNull null]),
+    @"renderingSDKVersion": DICT_DEFAULT(data.renderingSDKVersion,[NSNull null]),
     @"priceAccuracy": priceAccuracy,
     @"placementType": placementType,
   };
