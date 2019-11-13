@@ -39,7 +39,7 @@ function init(appId,done) {
   RNFyberAds.initWithAppId(appId,done);
 }
 function setUserId(userId) {
-  RNFyberAds.setUserId(setUserId);
+  RNFyberAds.setUserId(userId);
 }
 
 function getStatus(done) {
